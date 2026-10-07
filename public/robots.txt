@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+Disallow: /login
+Disallow: /register
+Disallow: /verify-email
+Disallow: /forgot-password
+Disallow: /reset-password
+Disallow: /checkout
+Disallow: /account
+Disallow: /staff
+
+Sitemap: https://kgmcloud.co.uk/sitemap.xml

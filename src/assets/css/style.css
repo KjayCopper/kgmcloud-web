@@ -1,0 +1,245 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand: #3b82f6;
+}
+
+@import "tailwindcss";
+
+
+/* EDIT BELOW */
+
+
+@layer base {
+  html,
+  body,
+  #app {
+    min-height: 100%;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+  }
+}
+
+/* Home page only: dark atmospheric theme */
+.home-page {
+  position: relative;
+  min-height: 100vh;
+  overflow-x: clip;
+  background: #03060c;
+  color: white;
+}
+
+/* Top atmospheric background */
+.hero-background {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 600px;
+  pointer-events: none;
+  z-index: 0;
+
+  background-image:
+    /* Blue atmospheric glow */
+    radial-gradient(
+      ellipse 75% 65% at 50% 0%,
+      rgba(26, 92, 204, 0.32) 0%,
+      rgba(17, 58, 132, 0.20) 35%,
+      rgba(6, 20, 48, 0.08) 65%,
+      transparent 100%
+    ),
+
+    /* Horizontal grid */
+    linear-gradient(
+      rgba(255, 255, 255, 0.055) 1px,
+      transparent 1px
+    ),
+
+    /* Vertical grid */
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.055) 1px,
+      transparent 1px
+    );
+
+  background-size:
+    100% 100%,
+    48px 48px,
+    48px 48px;
+
+  /* Fade the whole effect downward */
+  mask-image: linear-gradient(
+    to bottom,
+    black 0%,
+    black 25%,
+    rgba(0, 0, 0, 0.75) 45%,
+    rgba(0, 0, 0, 0.25) 70%,
+    transparent 100%
+  );
+
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    black 0%,
+    black 25%,
+    rgba(0, 0, 0, 0.75) 45%,
+    rgba(0, 0, 0, 0.25) 70%,
+    transparent 100%
+  );
+}
+
+/* === Landing concept animations === */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+.animate-float { animation: float 6s ease-in-out infinite; }
+
+@keyframes drift {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-16px) rotate(2deg); }
+}
+.animate-drift { animation: drift 7s ease-in-out infinite; }
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.animate-gradient-text {
+  background-size: 200% 200%;
+  animation: gradient-shift 6s ease infinite;
+}
+
+/* Police lightbar sequence: Left word = "Emergency", Right word = "lighting".
+   Pattern: 2x Blue L, 2x Red R, 2x Amber L, 2x Amber R, 2x Green L, 2x Green R.
+   Each slot = 0.26s active (0.1 blink, 0.06 gap, 0.1 blink) + 0.30s rest.
+   Full cycle 3.36s. */
+.police-light-left,
+.police-light-right {
+  display: inline-block;
+}
+
+.police-light-left {
+  animation: policeSequenceLeft 3.36s steps(1, end) infinite;
+}
+
+.police-light-right {
+  animation: policeSequenceRight 3.36s steps(1, end) infinite;
+}
+
+@keyframes policeSequenceLeft {
+  /* Blue */
+  0% {
+    color: #2979ff;
+    text-shadow:
+      0 0 10px #2979ff,
+      0 0 30px #2979ff,
+      0 0 70px rgba(41, 121, 255, 0.8);
+  }
+  4.8% {
+    color: #2979ff;
+    text-shadow:
+      0 0 10px #2979ff,
+      0 0 30px #2979ff,
+      0 0 70px rgba(41, 121, 255, 0.8);
+  }
+  /* Amber */
+  33.3% {
+    color: #ffb300;
+    text-shadow:
+      0 0 10px #ffb300,
+      0 0 30px #ffb300,
+      0 0 70px rgba(255, 179, 0, 0.8);
+  }
+  38.1% {
+    color: #ffb300;
+    text-shadow:
+      0 0 10px #ffb300,
+      0 0 30px #ffb300,
+      0 0 70px rgba(255, 179, 0, 0.8);
+  }
+  /* Green */
+  66.7% {
+    color: #00e676;
+    text-shadow:
+      0 0 10px #00e676,
+      0 0 30px #00e676,
+      0 0 70px rgba(0, 230, 118, 0.8);
+  }
+  71.4% {
+    color: #00e676;
+    text-shadow:
+      0 0 10px #00e676,
+      0 0 30px #00e676,
+      0 0 70px rgba(0, 230, 118, 0.8);
+  }
+  /* Off */
+  3%, 7.7%, 36.3%, 41.1%, 69.6%, 74.4%, 100% {
+    color: rgba(255, 255, 255, 0.2);
+    text-shadow: none;
+  }
+}
+
+@keyframes policeSequenceRight {
+  0% {
+    color: rgba(255, 255, 255, 0.2);
+    text-shadow: none;
+  }
+  /* Red */
+  16.7% {
+    color: #ff1744;
+    text-shadow:
+      0 0 10px #ff1744,
+      0 0 30px #ff1744,
+      0 0 70px rgba(255, 23, 68, 0.8);
+  }
+  21.4% {
+    color: #ff1744;
+    text-shadow:
+      0 0 10px #ff1744,
+      0 0 30px #ff1744,
+      0 0 70px rgba(255, 23, 68, 0.8);
+  }
+  /* Amber */
+  50% {
+    color: #ffb300;
+    text-shadow:
+      0 0 10px #ffb300,
+      0 0 30px #ffb300,
+      0 0 70px rgba(255, 179, 0, 0.8);
+  }
+  54.8% {
+    color: #ffb300;
+    text-shadow:
+      0 0 10px #ffb300,
+      0 0 30px #ffb300,
+      0 0 70px rgba(255, 179, 0, 0.8);
+  }
+  /* Green */
+  83.3% {
+    color: #00e676;
+    text-shadow:
+      0 0 10px #00e676,
+      0 0 30px #00e676,
+      0 0 70px rgba(0, 230, 118, 0.8);
+  }
+  88.1% {
+    color: #00e676;
+    text-shadow:
+      0 0 10px #00e676,
+      0 0 30px #00e676,
+      0 0 70px rgba(0, 230, 118, 0.8);
+  }
+  /* Off */
+  19.6%, 24.4%, 53%, 57.7%, 86.3%, 91.1%, 100% {
+    color: rgba(255, 255, 255, 0.2);
+    text-shadow: none;
+  }
+}
+
+@keyframes aurora {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.55; }
+  50% { transform: translate3d(40px, -30px, 0) scale(1.15); opacity: 0.9; }
+}
+.animate-aurora { animation: aurora 9s ease-in-out infinite; }
